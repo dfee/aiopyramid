@@ -97,6 +97,9 @@ class CoroutineOrExecutorMapper(AsyncioMapperBase):
             is_generator(original) or
             is_generator(
                 getattr(original, '__call__', None)
+            ) or
+            is_generator(
+                getattr(original, self.attr or '', None)
             )
         ):
             view = asyncio.coroutine(view)
